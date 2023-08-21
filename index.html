@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>div-привид</title>
+</head>
+<body>
+  <input type="text" id="text-field" placeholder="Enter text...">
+  <div id="info-div" class="hidden">Это дополнительная информация.</div>
+  <style>.hidden {
+    display: none;
+  }
+  </style>
+  <script>
+    const textField = document.getElementById('text-field');
+const infoDiv = document.getElementById('info-div');
+
+textField.addEventListener('focus', () => {
+  infoDiv.classList.remove('hidden');
+});
+
+textField.addEventListener('blur', () => {
+  infoDiv.classList.add('hidden');
+});
+  </script>
+</body>
+</html>
