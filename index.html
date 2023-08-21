@@ -1,28 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>div-привид</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Слайдер базовий</title>
 </head>
 <body>
-  <input type="text" id="text-field" placeholder="Enter text...">
-  <div id="info-div" class="hidden">Это дополнительная информация.</div>
-  <style>.hidden {
-    display: none;
-  }
-  </style>
+<div class="slider-container">
+  <button class="prev-button" id="prevButton">Prev</button>
+  <img src="images" alt="Image" id="sliderImage">
+  <button class="next-button" id="nextButton">Next</button>
+</div>
+<style>
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.slider-container {
+  display: flex;
+  align-items: center;
+}
+
+#sliderImage {
+  max-width: 80%;
+  height: auto;
+  margin: 0 20px;
+}
+
+.prev-button,
+.next-button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.prev-button {
+  border-radius: 5px 0 0 5px;
+}
+
+.next-button {
+  border-radius: 0 5px 5px 0;
+}
+
+</style>
   <script>
-    const textField = document.getElementById('text-field');
-const infoDiv = document.getElementById('info-div');
+  const images = ['image1.jpg', 'image2.jpg', 'image3.jpg'];
+const prevButton = document.getElementById('prevButton');
+const nextButton = document.getElementById('nextButton');
+const sliderImage = document.getElementById('sliderImage');
 
-textField.addEventListener('focus', () => {
-  infoDiv.classList.remove('hidden');
+let currentImageIndex = 0;
+
+function updateImage() {
+  sliderImage.src = images[currentImageIndex];
+  if (currentImageIndex === 0) {
+    prevButton.style.visibility = 'hidden';
+  } else {
+    prevButton.style.visibility = 'visible';
+  }
+  if (currentImageIndex === images.length - 1) {
+    nextButton.style.visibility = 'hidden';
+  } else {
+    nextButton.style.visibility = 'visible';
+  }
+}
+
+prevButton.addEventListener('click', () => {
+  if (currentImageIndex > 0) {
+    currentImageIndex--;
+    updateImage();
+  }
 });
 
-textField.addEventListener('blur', () => {
-  infoDiv.classList.add('hidden');
+nextButton.addEventListener('click', () => {
+  if (currentImageIndex < images.length - 1) {
+    currentImageIndex++;
+    updateImage();
+  }
 });
-  </script>
+
+updateImage();
+</script>
 </body>
 </html>
